@@ -3383,8 +3383,6 @@
   //#define USER_CMD_7_ENABLE
   #define USER_DESC_7 " "
   #define USER_GCODE_7 " "
-
-
 #endif
 
 /**
