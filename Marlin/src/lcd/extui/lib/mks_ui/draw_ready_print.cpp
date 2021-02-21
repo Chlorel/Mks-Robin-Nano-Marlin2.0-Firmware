@@ -45,7 +45,7 @@
 extern lv_group_t*  g;
 static lv_obj_t *scr;
 static lv_obj_t *labelExt1;
-#if HAS_MULTI_HOTEND
+#if HAS_MULTI_EXTRUDER
   static lv_obj_t *labelExt2;
 #endif
 static lv_obj_t *labelBed;
