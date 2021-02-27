@@ -3353,24 +3353,24 @@
   #define USER_SCRIPT_RETURN  // Return to status screen after a script
 
   #define USER_CMD_1_ENABLE
-  #define USER_DESC_1 "Home"
+  #define USER_DESC_1 " " // "Home"
   #define USER_GCODE_1 "G28"
 
   #define USER_CMD_2_ENABLE
-  #define USER_DESC_2 " " PREHEAT_1_LABEL
+  #define USER_DESC_2 " " // PREHEAT_1_LABEL
   #define USER_GCODE_2 "M140 S" STRINGIFY(PREHEAT_1_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_1_TEMP_HOTEND)
 
   #define USER_CMD_3_ENABLE
-  #define USER_DESC_3 " " PREHEAT_2_LABEL
+  #define USER_DESC_3 " " // PREHEAT_2_LABEL
   #define USER_GCODE_3 "M140 S" STRINGIFY(PREHEAT_2_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_2_TEMP_HOTEND)
 
   #define USER_CMD_4_ENABLE
-  #define USER_DESC_4 "Heat Bed"
+  #define USER_DESC_4 " " // "Heat Bed"
   #define USER_GCODE_4 "M140 S" STRINGIFY(PREHEAT_1_TEMP_BED) 
 
-  //#define USER_CMD_5_ENABLE
-  #define USER_DESC_5 "Home & Info"
-  #define USER_GCODE_5 "G28\nM503"
+  #define USER_CMD_5_ENABLE
+  #define USER_DESC_5 " " // "Motor Off"
+  #define USER_GCODE_5 "M84"
 
   //#define USER_CMD_6_ENABLE
   #define USER_DESC_6 " "
