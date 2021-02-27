@@ -37,7 +37,7 @@
 #define DEC_TEXT_FR                   "Réduire"
 #define EXTRUDER_1_TEXT_FR            "Extr1"
 #define EXTRUDER_2_TEXT_FR            "Extr2"
-#define HEATBED_TEXT_FR               "Hotlit"
+#define HEATBED_TEXT_FR               "Plateau"
 #define TEXT_1C_FR                    "1℃"
 #define TEXT_5C_FR                    "5℃"
 #define TEXT_10C_FR                   "10℃"
