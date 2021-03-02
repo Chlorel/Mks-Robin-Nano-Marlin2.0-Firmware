@@ -815,9 +815,7 @@ void GUI_RefreshPage() {
     case PRINT_READY_UI:
       if (temps_update_flag) {
         temps_update_flag = false;
-        disp_ext_temp_ready();
-        disp_bed_temp_ready();
-        disp_fan_speed_ready();
+        disp_values_ready_print();
       }
       break;
 
@@ -1046,9 +1044,6 @@ void lv_clear_cur_ui() {
     #endif
     #if ENABLED(TOUCH_MI_PROBE)
       case TOUCHMI_UI:                lv_clear_touchmi_settings(); break;
-    #endif
-    #if ENABLED(TOUCH_MI_PROBE)
-    case TOUCHUI_UI:                  lv_clear_touchmi_settings(); break;
     #endif
     case PAUSE_POS_UI:                lv_clear_pause_position(); break;
       #if HAS_TRINAMIC_CONFIG

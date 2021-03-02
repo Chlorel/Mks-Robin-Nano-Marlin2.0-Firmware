@@ -182,6 +182,8 @@ static const char assets[][LONG_FILENAME_LENGTH] = {
   "bmp_printing.bin",
   "bmp_set.bin",
   "bmp_tool.bin",
+  "bmp_xpos_state.bin",
+  "bmp_ypos_state.bin",
 
   // base icons
   "bmp_arrow.bin",
@@ -191,6 +193,7 @@ static const char assets[][LONG_FILENAME_LENGTH] = {
   "bmp_disable.bin",
   "bmp_enable.bin",
   "bmp_return.bin",
+  "bmp_init_state.bin",
 
   #if ENABLED(MKS_WIFI_MODULE)
     // wifi screen
