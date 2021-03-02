@@ -34,9 +34,7 @@ extern void disp_det_ok();
 extern void disp_tmc_ok();
 extern void disp_tmc_error();
 extern void lv_clear_ready_print();
-extern void disp_ext_temp_ready();
-extern void disp_bed_temp_ready();
-extern void disp_fan_speed_ready();
+extern void disp_values_ready_print();
 
 
 #ifdef __cplusplus

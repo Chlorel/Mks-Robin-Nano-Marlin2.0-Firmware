@@ -815,9 +815,7 @@ void GUI_RefreshPage() {
     case PRINT_READY_UI:
       if (temps_update_flag) {
         temps_update_flag = false;
-        disp_ext_temp_ready();
-        disp_bed_temp_ready();
-        disp_fan_speed_ready();
+        disp_values_ready_print();
       }
       break;
 
