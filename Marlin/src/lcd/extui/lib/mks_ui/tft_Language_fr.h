@@ -25,6 +25,7 @@
 #define TOOL_TEXT_FR                  "prêt"
 #define PREHEAT_TEXT_FR               "Préchauffe"
 #define MOVE_TEXT_FR                  "Déplace"
+#define TEXT_ZOFFSET_FR               "Z Offset"
 #define HOME_TEXT_FR                  "Acceuil"
 #define PRINT_TEXT_FR                 "Impression"
 #define EXTRUDE_TEXT_FR               "Extruder"

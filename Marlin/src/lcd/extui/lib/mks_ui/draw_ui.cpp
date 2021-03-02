@@ -1047,9 +1047,6 @@ void lv_clear_cur_ui() {
     #if ENABLED(TOUCH_MI_PROBE)
       case TOUCHMI_UI:                lv_clear_touchmi_settings(); break;
     #endif
-    #if ENABLED(TOUCH_MI_PROBE)
-    case TOUCHUI_UI:                  lv_clear_touchmi_settings(); break;
-    #endif
     case PAUSE_POS_UI:                lv_clear_pause_position(); break;
       #if HAS_TRINAMIC_CONFIG
         case TMC_CURRENT_UI:          lv_clear_tmc_current_settings(); break;
