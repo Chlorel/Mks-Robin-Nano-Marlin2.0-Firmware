@@ -168,7 +168,7 @@ void disp_z_offset_value() {
   #if HAS_BED_PROBE
    char str_1[16];
   #endif
-  sprintf_P(buf, PSTR("offset Z: %s mm"), TERN(HAS_BED_PROBE, dtostrf(probe.offset.z, 1, 3, str_1), "0"));
+  sprintf_P(buf, PSTR("%s : %s mm"), move_menu.zoffset, (HAS_BED_PROBE ? dtostrf(probe.offset.z, 1, 3, str_1) : "0"));
   lv_label_set_text(zOffsetText, buf);
 }
 
