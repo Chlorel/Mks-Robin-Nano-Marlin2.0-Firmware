@@ -3347,6 +3347,7 @@
  */
 #define CUSTOM_USER_MENUS
 #if ENABLED(CUSTOM_USER_MENUS)
+  #define CUSTOM_RETURN_READY_PRINT
   #define CUSTOM_USER_MENU_TITLE "Commandes utilisateur"
   #define USER_SCRIPT_DONE "M117 Commande executee"
   #define USER_SCRIPT_AUDIBLE_FEEDBACK
