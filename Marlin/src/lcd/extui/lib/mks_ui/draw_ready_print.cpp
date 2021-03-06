@@ -20,6 +20,8 @@
  *
  */
 #include "../../../../inc/MarlinConfigPre.h"
+#include "../../../../module/motion.h"
+
 
 #if HAS_TFT_LVGL_UI
 
@@ -44,6 +46,16 @@
 
 extern lv_group_t*  g;
 static lv_obj_t *scr;
+static lv_obj_t *labelX;
+static lv_obj_t *labelY;
+static lv_obj_t *labelZ;
+static lv_obj_t *labelExt1;
+#if HAS_MULTI_EXTRUDER
+  static lv_obj_t *labelExt2;
+#endif
+static lv_obj_t *labelBed;
+static lv_obj_t *labelFan;
+
 #if ENABLED(MKS_TEST)
   uint8_t curent_disp_ui = 0;
 #endif
@@ -73,6 +85,7 @@ static void event_handler(lv_obj_t *obj, lv_event_t event) {
 lv_obj_t *limit_info, *det_info;
 lv_obj_t *tmc_state_info;
 lv_style_t limit_style, det_style, tmc_state_style;
+
 void disp_Limit_ok() {
   limit_style.text.color.full = 0xFFFF;
   lv_obj_set_style(limit_info, &limit_style);
@@ -196,9 +209,63 @@ void lv_draw_ready_print(void) {
 
   }
   else {
-    lv_big_button_create(scr, "F:/bmp_tool.bin", main_menu.tool, 20, 90, event_handler, ID_TOOL);
-    lv_big_button_create(scr, "F:/bmp_set.bin", main_menu.set, 180, 90, event_handler, ID_SET);
-    lv_big_button_create(scr, "F:/bmp_printing.bin", main_menu.print, 340, 90, event_handler, ID_PRINT);
+
+    lv_obj_t *imageX = lv_img_create(scr, nullptr);
+    lv_img_set_src(imageX    , "F:/bmp_xpos_state.bin");
+    lv_obj_set_pos(imageX    ,  61, 36);
+
+    lv_obj_t *imageY = lv_img_create(scr, nullptr);
+    lv_img_set_src(imageY    , "F:/bmp_ypos_state.bin");
+    lv_obj_set_pos(imageY    , 165, 36);
+
+    lv_obj_t *imageZ = lv_img_create(scr, nullptr);
+    lv_img_set_src(imageZ    , "F:/bmp_zpos_state.bin");
+    lv_obj_set_pos(imageZ    , 269, 36);
+
+    labelX         = lv_label_create(scr,   2,  83, nullptr);
+    labelY         = lv_label_create(scr, 121,  83, nullptr);
+    labelZ         = lv_label_create(scr, 240,  83, nullptr);
+
+    lv_obj_align(labelX, imageX, LV_ALIGN_IN_BOTTOM_MID, 2, 20);
+    lv_obj_align(labelY, imageY, LV_ALIGN_IN_BOTTOM_MID, 2, 20);
+    lv_obj_align(labelZ, imageZ, LV_ALIGN_IN_BOTTOM_MID, 2, 20);
+
+
+    lv_obj_t *imageExt1      = lv_img_create(scr, nullptr);
+    lv_img_set_src(imageExt1    , "F:/bmp_ext1_state.bin");
+    lv_obj_set_pos(imageExt1    , 61, 107);
+
+    #if HAS_MULTI_EXTRUDER
+      lv_obj_t *imageExt2      = lv_img_create(scr, nullptr);
+      lv_img_set_src(imageExt2    , "F:/bmp_ext2_state.bin");
+      lv_obj_set_pos(imageExt2    , 165, 107);
+    #endif
+
+    lv_obj_t *imageBed = lv_img_create(scr, nullptr);
+    lv_img_set_src(imageBed, "F:/bmp_bed_state.bin");
+    lv_obj_set_pos(imageBed, 269, 107);
+
+    lv_obj_t *imageFan = lv_img_create(scr, nullptr);
+    lv_img_set_src(imageFan, "F:/bmp_fan_state.bin");
+    lv_obj_set_pos(imageFan, 373, 107);
+
+    labelExt1      = lv_label_create(scr,   2, 154, nullptr);
+    #if HAS_MULTI_EXTRUDER
+      labelExt2      = lv_label_create(scr, 121, 154, nullptr);
+    #endif
+    labelBed       = lv_label_create(scr, 240, 154, nullptr);
+    labelFan       = lv_label_create(scr, 361, 154, nullptr);
+
+    lv_obj_align(labelExt1, imageExt1, LV_ALIGN_IN_BOTTOM_MID, 2, 20);
+    #if HAS_MULTI_EXTRUDER
+      lv_obj_align(labelExt2, imageExt2, LV_ALIGN_IN_BOTTOM_MID, 2, 20);
+    #endif
+    lv_obj_align(labelBed , imageBed , LV_ALIGN_IN_BOTTOM_MID, 2, 20);
+    lv_obj_align(labelFan , imageFan , LV_ALIGN_IN_BOTTOM_MID, 2, 20);
+
+    lv_big_button_create(scr, "F:/bmp_tool.bin"    , main_menu.tool ,  20, 178, event_handler, ID_TOOL);
+    lv_big_button_create(scr, "F:/bmp_set.bin"     , main_menu.set  , 180, 178, event_handler, ID_SET);
+    lv_big_button_create(scr, "F:/bmp_printing.bin", main_menu.print, 340, 178, event_handler, ID_PRINT);
   }
 
   #if ENABLED(TOUCH_SCREEN_CALIBRATION)
@@ -208,6 +275,37 @@ void lv_draw_ready_print(void) {
       lv_draw_touch_calibration_screen();
     }
   #endif
+
+  disp_values_ready_print();
+}
+
+void disp_values_ready_print() {
+
+  dtostrf(current_position[X_AXIS], 1, 3, public_buf_l);
+  lv_label_set_text(labelX, public_buf_l);
+  dtostrf(current_position[Y_AXIS], 1, 3, public_buf_l);
+  lv_label_set_text(labelY, public_buf_l);
+  dtostrf(current_position[Z_AXIS], 1, 3, public_buf_l);
+  lv_label_set_text(labelZ, public_buf_l);
+
+  sprintf(public_buf_l, printing_menu.temp1, (int)thermalManager.temp_hotend[0].celsius, (int)thermalManager.temp_hotend[0].target);
+  lv_label_set_text(labelExt1, public_buf_l);
+  #if HAS_MULTI_EXTRUDER
+    #if ENABLED(SINGLENOZZLE)
+      sprintf(public_buf_l, printing_menu.temp1, (int)thermalManager.temp_hotend[0].celsius, (int)thermalManager.temp_hotend[0].target);
+    #else
+      sprintf(public_buf_l, printing_menu.temp1, (int)thermalManager.temp_hotend[1].celsius, (int)thermalManager.temp_hotend[1].target);
+    #endif
+    lv_label_set_text(labelExt2, public_buf_l);
+  #endif
+
+  #if HAS_HEATED_BED
+    sprintf(public_buf_l, printing_menu.bed_temp, (int)thermalManager.temp_bed.celsius, (int)thermalManager.temp_bed.target);
+    lv_label_set_text(labelBed, public_buf_l);
+  #endif
+
+  sprintf_P(public_buf_l, PSTR("%3d"), thermalManager.fan_speed[0]);
+  lv_label_set_text(labelFan, public_buf_l);
 }
 
 void lv_clear_ready_print() {

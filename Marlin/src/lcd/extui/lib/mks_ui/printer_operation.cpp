@@ -160,7 +160,7 @@ void printer_state_polling() {
       public_buf_m[sizeof(public_buf_m) - 1] = 0;
       gcode.process_subcommands_now_P(PSTR(public_buf_m));
       lv_clear_cur_ui();
-      bltouch_do_init();
+      bltouch_do_init(false);
       lv_draw_bltouch_settings();
       uiCfg.autoLeveling = 0;
     }
