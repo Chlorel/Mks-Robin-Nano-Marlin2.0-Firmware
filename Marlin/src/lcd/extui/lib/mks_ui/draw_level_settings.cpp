@@ -66,7 +66,6 @@ static void event_handler(lv_obj_t *obj, lv_event_t event) {
       case ID_LEVEL_BLTOUCH:
         last_disp_state = LEVELING_PARA_UI;
         lv_clear_level_settings();
-        bltouch_do_init();
         lv_draw_bltouch_settings();
         break;
     #endif
