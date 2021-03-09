@@ -166,9 +166,11 @@ void disp_baby_step_dist() {
 void disp_z_offset_value() {
   char buf[20];
   #if HAS_BED_PROBE
-   char str_1[16];
+    char str_1[16];
+    sprintf_P(buf, PSTR("%s : %s mm"), move_menu.zoffset, dtostrf(probe.offset.z, 1, 3, str_1));
+  #else
+    sprintf_P(buf, PSTR("%s : 0.00 mm"), move_menu.zoffset );
   #endif
-  sprintf_P(buf, PSTR("%s : %s mm"), move_menu.zoffset, (HAS_BED_PROBE ? dtostrf(probe.offset.z, 1, 3, str_1) : "0"));
   lv_label_set_text(zOffsetText, buf);
 }
 
